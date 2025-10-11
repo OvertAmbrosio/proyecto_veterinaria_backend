@@ -4,26 +4,28 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
   Index,
 } from 'typeorm';
+import { Pet } from '../pets/pet.entity.js';
 
-@Entity('users')
-export class User {
+@Entity('owners')
+export class Owner {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Index({ unique: true })
-  @Column({ type: 'varchar', length: 255, unique: true })
-  email: string;
-
-  @Column({ type: 'varchar', length: 255 })
-  passwordHash: string;
-
-  @Column({ type: 'varchar', length: 120 })
+  @Index()
+  @Column({ type: 'varchar', length: 160 })
   name: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
-  refreshTokenHash?: string | null;
+  email?: string | null;
+
+  @Column({ type: 'varchar', length: 40, nullable: true })
+  phone?: string | null;
+
+  @OneToMany(() => Pet, (pet) => pet.owner)
+  pets: Pet[];
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;

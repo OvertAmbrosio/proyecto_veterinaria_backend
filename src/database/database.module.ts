@@ -3,6 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import type { EnvironmentVariables } from '../config/environment.js';
 import { User } from '../users/user.entity.js';
+import { Owner } from '../owners/owner.entity.js';
+import { Pet } from '../pets/pet.entity.js';
+import { Appointment } from '../appointments/appointment.entity.js';
+import { ClinicalRecordEntry } from '../clinical-records/clinical-record-entry.entity.js';
+import { PetMedicalProfile } from '../medical-profiles/pet-medical-profile.entity.js';
+import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 @Module({
@@ -20,7 +26,15 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
         const options: PostgresConnectionOptions = {
           type: 'postgres',
           url,
-          entities: [User],
+          entities: [
+            User,
+            Owner,
+            Pet,
+            Appointment,
+            ClinicalRecordEntry,
+            PetMedicalProfile,
+            Veterinarian,
+          ],
           synchronize: true, // TODO: disable in prod and use migrations
           ssl: !isLocal,
           extra: !isLocal ? { ssl: { rejectUnauthorized: false } } : undefined,

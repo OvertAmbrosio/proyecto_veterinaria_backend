@@ -31,7 +31,7 @@ export class AuthService {
 
   private async signAccessToken(user: User): Promise<string> {
     const payload: JwtPayload = {
-      sub: user.id,
+      sub: String(user.id),
       email: user.email,
       name: user.name,
       typ: 'access',
@@ -48,7 +48,7 @@ export class AuthService {
 
   private async signRefreshToken(user: User): Promise<string> {
     const payload: JwtPayload = {
-      sub: user.id,
+      sub: String(user.id),
       email: user.email,
       name: user.name,
       typ: 'refresh',
@@ -85,7 +85,8 @@ export class AuthService {
       );
       if (decoded.typ !== 'refresh')
         throw new UnauthorizedException('Token inválido');
-      const user = await this.usersService.findById(decoded.sub);
+      const userId = Number(decoded.sub);
+      const user = await this.usersService.findById(userId);
       if (!user || !user.refreshTokenHash)
         throw new UnauthorizedException('No autorizado');
       const ok = await bcrypt.compare(refreshToken, user.refreshTokenHash);

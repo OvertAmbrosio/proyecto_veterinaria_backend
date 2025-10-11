@@ -39,16 +39,16 @@ export class UsersService {
     return this.usersRepo.findOne({ where: { email: email.toLowerCase() } });
   }
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: number): Promise<User | null> {
     return this.usersRepo.findOne({ where: { id } });
   }
 
-  async setRefreshToken(userId: string, refreshToken: string): Promise<void> {
+  async setRefreshToken(userId: number, refreshToken: string): Promise<void> {
     const refreshTokenHash = await bcrypt.hash(refreshToken, 10);
     await this.usersRepo.update({ id: userId }, { refreshTokenHash });
   }
 
-  async removeRefreshToken(userId: string): Promise<void> {
+  async removeRefreshToken(userId: number): Promise<void> {
     await this.usersRepo.update({ id: userId }, { refreshTokenHash: null });
   }
 }
