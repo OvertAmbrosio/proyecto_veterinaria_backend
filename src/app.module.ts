@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
@@ -21,6 +24,9 @@ import { VeterinariansModule } from './veterinarians/veterinarians.module.js';
       envFilePath: ['.env'],
       load: [appConfig],
       validate: validateEnv,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
     }),
     DatabaseModule,
     UsersModule,
