@@ -13,7 +13,7 @@ import { validateEnv } from './config/validate-env.js';
 import { OwnersModule } from './owners/owners.module.js';
 import { PetsModule } from './pets/pets.module.js';
 import { AppointmentsModule } from './appointments/appointments.module.js';
-import { ClinicalRecordsModule } from './clinical-records/clinical-records.module.js';
+import { ClinicalHistoryModule } from './clinical-history/clinical-history.module.js';
 import { MedicalProfilesModule } from './medical-profiles/medical-profiles.module.js';
 import { VeterinariansModule } from './veterinarians/veterinarians.module.js';
 
@@ -34,7 +34,7 @@ import { VeterinariansModule } from './veterinarians/veterinarians.module.js';
     OwnersModule,
     PetsModule,
     AppointmentsModule,
-    ClinicalRecordsModule,
+    ClinicalHistoryModule,
     MedicalProfilesModule,
     VeterinariansModule,
   ],

@@ -2,28 +2,28 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
-  ClinicalRecordEntry,
-  ClinicalRecordCategory,
-} from './clinical-record-entry.entity.js';
+  ClinicalHistory,
+  ClinicalHistoryCategory,
+} from './clinical-history.entity.js';
 import { Pet } from '../pets/pet.entity.js';
 import { Appointment } from '../appointments/appointment.entity.js';
 
 @Injectable()
-export class ClinicalRecordsService {
+export class ClinicalHistoryService {
   constructor(
-    @InjectRepository(ClinicalRecordEntry)
-    private readonly recordsRepo: Repository<ClinicalRecordEntry>,
+    @InjectRepository(ClinicalHistory)
+    private readonly historyRepo: Repository<ClinicalHistory>,
   ) {}
 
   async addEntry(params: {
     pet: Pet;
-    category: ClinicalRecordCategory;
+    category: ClinicalHistoryCategory;
     title: string;
     details?: string;
     appointment?: Appointment | null;
     meta?: Record<string, unknown> | null;
-  }): Promise<ClinicalRecordEntry> {
-    const entry = this.recordsRepo.create({
+  }): Promise<ClinicalHistory> {
+    const entry = this.historyRepo.create({
       pet: params.pet,
       category: params.category,
       title: params.title,
@@ -31,11 +31,11 @@ export class ClinicalRecordsService {
       appointment: params.appointment ?? null,
       meta: params.meta ?? null,
     });
-    return this.recordsRepo.save(entry);
+    return this.historyRepo.save(entry);
   }
 
-  async findByPet(petId: number): Promise<ClinicalRecordEntry[]> {
-    return this.recordsRepo.find({
+  async findByPet(petId: number): Promise<ClinicalHistory[]> {
+    return this.historyRepo.find({
       where: { pet: { id: petId } },
       order: { createdAt: 'DESC' },
       relations: { appointment: true },

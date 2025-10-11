@@ -14,4 +14,9 @@ export class CreateOwnerDto {
   @IsString()
   @MaxLength(40)
   phone?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(32)
+  documentNumber?: string;
 }

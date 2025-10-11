@@ -24,6 +24,10 @@ export class Owner {
   @Column({ type: 'varchar', length: 40, nullable: true })
   phone?: string | null;
 
+  @Index()
+  @Column({ type: 'varchar', length: 32, nullable: true })
+  documentNumber?: string | null;
+
   @OneToMany(() => Pet, (pet) => pet.owner)
   pets: Pet[];
 

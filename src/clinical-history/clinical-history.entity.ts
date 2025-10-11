@@ -10,7 +10,7 @@ import {
 import { Pet } from '../pets/pet.entity.js';
 import { Appointment } from '../appointments/appointment.entity.js';
 
-export enum ClinicalRecordCategory {
+export enum ClinicalHistoryCategory {
   APPOINTMENT = 'APPOINTMENT',
   STATUS_CHANGE = 'STATUS_CHANGE',
   NOTE = 'NOTE',
@@ -18,8 +18,8 @@ export enum ClinicalRecordCategory {
   TREATMENT = 'TREATMENT',
 }
 
-@Entity('clinical_record_entries')
-export class ClinicalRecordEntry {
+@Entity('clinical_histories')
+export class ClinicalHistory {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,8 +32,11 @@ export class ClinicalRecordEntry {
   appointment?: Appointment | null;
 
   @Index()
-  @Column({ type: 'enum', enum: ClinicalRecordCategory })
-  category: ClinicalRecordCategory;
+  @Column({
+    type: 'enum',
+    enum: ClinicalHistoryCategory,
+  })
+  category: ClinicalHistoryCategory;
 
   @Column({ type: 'varchar', length: 160 })
   title: string;

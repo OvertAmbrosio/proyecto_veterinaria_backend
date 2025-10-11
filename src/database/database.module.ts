@@ -6,7 +6,7 @@ import { User } from '../users/user.entity.js';
 import { Owner } from '../owners/owner.entity.js';
 import { Pet } from '../pets/pet.entity.js';
 import { Appointment } from '../appointments/appointment.entity.js';
-import { ClinicalRecordEntry } from '../clinical-records/clinical-record-entry.entity.js';
+import { ClinicalHistory } from '../clinical-history/clinical-history.entity.js';
 import { PetMedicalProfile } from '../medical-profiles/pet-medical-profile.entity.js';
 import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
@@ -31,7 +31,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
             Owner,
             Pet,
             Appointment,
-            ClinicalRecordEntry,
+            ClinicalHistory,
             PetMedicalProfile,
             Veterinarian,
           ],

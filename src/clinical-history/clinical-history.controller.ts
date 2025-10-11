@@ -7,11 +7,11 @@ import {
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
-import { ClinicalRecordsService } from './clinical-records.service.js';
+import { ClinicalHistoryService } from './clinical-history.service.js';
 
-@Controller('clinical-records')
-export class ClinicalRecordsController {
-  constructor(private readonly records: ClinicalRecordsService) {}
+@Controller('clinical-history')
+export class ClinicalHistoryController {
+  constructor(private readonly history: ClinicalHistoryService) {}
 
   @Get()
   @HttpCode(HttpStatus.OK)
@@ -19,12 +19,12 @@ export class ClinicalRecordsController {
     if (!petId) return [];
     const id = Number(petId);
     if (Number.isNaN(id)) return [];
-    return this.records.findByPet(id);
+    return this.history.findByPet(id);
   }
 
   @Get('pet/:petId')
   @HttpCode(HttpStatus.OK)
   findByPetParam(@Param('petId', ParseIntPipe) petId: number) {
-    return this.records.findByPet(petId);
+    return this.history.findByPet(petId);
   }
 }

@@ -9,8 +9,8 @@ import {
 import { CreateAppointmentDto } from './dto/create-appointment.dto.js';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto.js';
 import { Pet } from '../pets/pet.entity.js';
-import { ClinicalRecordsService } from '../clinical-records/clinical-records.service.js';
-import { ClinicalRecordCategory } from '../clinical-records/clinical-record-entry.entity.js';
+import { ClinicalHistoryService } from '../clinical-history/clinical-history.service.js';
+import { ClinicalHistoryCategory } from '../clinical-history/clinical-history.entity.js';
 import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class AppointmentsService {
     private readonly petsRepo: Repository<Pet>,
     @InjectRepository(Veterinarian)
     private readonly vetsRepo: Repository<Veterinarian>,
-    private readonly records: ClinicalRecordsService,
+    private readonly records: ClinicalHistoryService,
   ) {}
 
   async create(dto: CreateAppointmentDto): Promise<Appointment> {
@@ -52,7 +52,7 @@ export class AppointmentsService {
 
     await this.records.addEntry({
       pet,
-      category: ClinicalRecordCategory.APPOINTMENT,
+      category: ClinicalHistoryCategory.APPOINTMENT,
       title: `Nueva cita (${saved.priority})`,
       details: `Motivo: ${saved.reason}`,
       appointment: saved,
@@ -125,7 +125,7 @@ export class AppointmentsService {
       await this.records.addEntry({
         pet: saved.pet,
         appointment: saved,
-        category: ClinicalRecordCategory.STATUS_CHANGE,
+        category: ClinicalHistoryCategory.STATUS_CHANGE,
         title: `Cambio de estado: ${prevStatus} -> ${saved.status}`,
         details: dto.notes,
         meta: { from: prevStatus, to: saved.status },
