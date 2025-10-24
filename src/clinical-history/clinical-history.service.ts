@@ -4,9 +4,9 @@ import { Repository } from 'typeorm';
 import {
   ClinicalHistory,
   ClinicalHistoryCategory,
-} from './clinical-history.entity.js';
-import { Pet } from '../pets/pet.entity.js';
-import { Appointment } from '../appointments/appointment.entity.js';
+} from './clinical-history.entity';
+import { Pet } from '../pets/pet.entity';
+import { Appointment } from '../appointments/appointment.entity';
 
 @Injectable()
 export class ClinicalHistoryService {

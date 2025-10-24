@@ -8,7 +8,7 @@ import {
   Index,
   JoinColumn,
 } from 'typeorm';
-import { Owner } from '../owners/owner.entity.js';
+import { Owner } from '../owners/owner.entity';
 
 @Entity('pets')
 export class Pet {

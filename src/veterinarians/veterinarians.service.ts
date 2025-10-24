@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Veterinarian } from './veterinarian.entity.js';
-import { CreateVeterinarianDto } from './dto/create-veterinarian.dto.js';
-import { UpdateVeterinarianDto } from './dto/update-veterinarian.dto.js';
+import { Veterinarian } from './veterinarian.entity';
+import { CreateVeterinarianDto } from './dto/create-veterinarian.dto';
+import { UpdateVeterinarianDto } from './dto/update-veterinarian.dto';
 
 @Injectable()
 export class VeterinariansService {

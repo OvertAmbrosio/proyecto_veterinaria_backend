@@ -10,9 +10,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { VeterinariansService } from './veterinarians.service.js';
-import { CreateVeterinarianDto } from './dto/create-veterinarian.dto.js';
-import { UpdateVeterinarianDto } from './dto/update-veterinarian.dto.js';
+import { VeterinariansService } from './veterinarians.service';
+import { CreateVeterinarianDto } from './dto/create-veterinarian.dto';
+import { UpdateVeterinarianDto } from './dto/update-veterinarian.dto';
 
 @Controller('veterinarians')
 export class VeterinariansController {

@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PetMedicalProfile } from './pet-medical-profile.entity.js';
-import { Pet } from '../pets/pet.entity.js';
-import { CreateMedicalProfileDto } from './dto/create-medical-profile.dto.js';
-import { UpdateMedicalProfileDto } from './dto/update-medical-profile.dto.js';
+import { PetMedicalProfile } from './pet-medical-profile.entity';
+import { Pet } from '../pets/pet.entity';
+import { CreateMedicalProfileDto } from './dto/create-medical-profile.dto';
+import { UpdateMedicalProfileDto } from './dto/update-medical-profile.dto';
 
 @Injectable()
 export class MedicalProfilesService {

@@ -8,9 +8,9 @@ import {
   ParseIntPipe,
   Put,
 } from '@nestjs/common';
-import { MedicalProfilesService } from './medical-profiles.service.js';
-import { CreateMedicalProfileDto } from './dto/create-medical-profile.dto.js';
-import { UpdateMedicalProfileDto } from './dto/update-medical-profile.dto.js';
+import { MedicalProfilesService } from './medical-profiles.service';
+import { CreateMedicalProfileDto } from './dto/create-medical-profile.dto';
+import { UpdateMedicalProfileDto } from './dto/update-medical-profile.dto';
 
 @Controller('medical-profiles')
 export class MedicalProfilesController {

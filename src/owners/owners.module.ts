@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Owner } from './owner.entity.js';
-import { OwnersService } from './owners.service.js';
-import { OwnersController } from './owners.controller.js';
-import { Pet } from '../pets/pet.entity.js';
+import { Owner } from './owner.entity';
+import { OwnersService } from './owners.service';
+import { OwnersController } from './owners.controller';
+import { Pet } from '../pets/pet.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Owner, Pet])],

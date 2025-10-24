@@ -11,9 +11,10 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { AppointmentsService } from './appointments.service.js';
-import { CreateAppointmentDto } from './dto/create-appointment.dto.js';
-import { UpdateAppointmentDto } from './dto/update-appointment.dto.js';
+import { AppointmentsService } from './appointments.service';
+import { AppointmentStatus } from './appointment.entity';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Controller('appointments')
 export class AppointmentsController {
@@ -26,12 +27,15 @@ export class AppointmentsController {
   }
 
   @Get()
-  findAll(@Query('petId') petId?: string) {
-    if (petId) {
-      const pid = Number(petId);
-      if (!Number.isNaN(pid)) return this.appointments.findAll(pid);
-    }
-    return this.appointments.findAll();
+  findAll(
+    @Query('petId') petId?: string,
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+    @Query('status') status?: AppointmentStatus,
+  ) {
+    const pid =
+      petId && !Number.isNaN(Number(petId)) ? Number(petId) : undefined;
+    return this.appointments.findAll(pid, from, to, status);
   }
 
   @Get(':id')

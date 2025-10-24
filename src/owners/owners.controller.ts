@@ -10,9 +10,9 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { OwnersService } from './owners.service.js';
-import { CreateOwnerDto } from './dto/create-owner.dto.js';
-import { UpdateOwnerDto } from './dto/update-owner.dto.js';
+import { OwnersService } from './owners.service';
+import { CreateOwnerDto } from './dto/create-owner.dto';
+import { UpdateOwnerDto } from './dto/update-owner.dto';
 
 @Controller('owners')
 export class OwnersController {

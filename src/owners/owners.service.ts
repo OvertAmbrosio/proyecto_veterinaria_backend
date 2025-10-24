@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Owner } from './owner.entity.js';
-import { CreateOwnerDto } from './dto/create-owner.dto.js';
-import { UpdateOwnerDto } from './dto/update-owner.dto.js';
-import { Pet } from '../pets/pet.entity.js';
+import { Owner } from './owner.entity';
+import { CreateOwnerDto } from './dto/create-owner.dto';
+import { UpdateOwnerDto } from './dto/update-owner.dto';
+import { Pet } from '../pets/pet.entity';
 
 @Injectable()
 export class OwnersService {
@@ -34,9 +34,14 @@ export class OwnersService {
   }
 
   async update(id: number, dto: UpdateOwnerDto): Promise<Owner> {
-    const pre = await this.ownersRepo.preload({ id, ...dto });
-    if (!pre) throw new NotFoundException('Owner no encontrado');
-    return this.ownersRepo.save(pre);
+    const owner = await this.ownersRepo.findOne({ where: { id } });
+    if (!owner) throw new NotFoundException('Owner no encontrado');
+    if (!dto || Object.keys(dto).length === 0) {
+      // sin cambios: devolver entidad actual para evitar update vacío
+      return owner;
+    }
+    Object.assign(owner, dto);
+    return this.ownersRepo.save(owner);
   }
 
   async remove(id: number): Promise<void> {

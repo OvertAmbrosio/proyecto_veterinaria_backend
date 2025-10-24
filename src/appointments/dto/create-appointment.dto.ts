@@ -9,7 +9,7 @@ import {
   MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { AppointmentPriority } from '../appointment.entity.js';
+import { AppointmentPriority } from '../appointment.entity';
 
 export class CreateAppointmentDto {
   @Type(() => Number)

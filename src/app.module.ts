@@ -3,19 +3,21 @@ import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
-import { UsersModule } from './users/users.module.js';
-import { AuthModule } from './auth/auth.module.js';
-import appConfig from './config/app.config.js';
-import { DatabaseModule } from './database/database.module.js';
-import { validateEnv } from './config/validate-env.js';
-import { OwnersModule } from './owners/owners.module.js';
-import { PetsModule } from './pets/pets.module.js';
-import { AppointmentsModule } from './appointments/appointments.module.js';
-import { ClinicalHistoryModule } from './clinical-history/clinical-history.module.js';
-import { MedicalProfilesModule } from './medical-profiles/medical-profiles.module.js';
-import { VeterinariansModule } from './veterinarians/veterinarians.module.js';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import appConfig from './config/app.config';
+import { DatabaseModule } from './database/database.module';
+import { validateEnv } from './config/validate-env';
+import { OwnersModule } from './owners/owners.module';
+import { PetsModule } from './pets/pets.module';
+import { AppointmentsModule } from './appointments/appointments.module';
+import { ClinicalHistoryModule } from './clinical-history/clinical-history.module';
+import { MedicalProfilesModule } from './medical-profiles/medical-profiles.module';
+import { VeterinariansModule } from './veterinarians/veterinarians.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { SalesModule } from './sales/sales.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { VeterinariansModule } from './veterinarians/veterinarians.module.js';
     ClinicalHistoryModule,
     MedicalProfilesModule,
     VeterinariansModule,
+    InventoryModule,
+    SalesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,7 +7,7 @@ import {
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
-import { ClinicalHistoryService } from './clinical-history.service.js';
+import { ClinicalHistoryService } from './clinical-history.service';
 
 @Controller('clinical-history')
 export class ClinicalHistoryController {

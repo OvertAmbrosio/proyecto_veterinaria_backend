@@ -7,8 +7,8 @@ import {
   JoinColumn,
   Index,
 } from 'typeorm';
-import { Pet } from '../pets/pet.entity.js';
-import { Appointment } from '../appointments/appointment.entity.js';
+import { Pet } from '../pets/pet.entity';
+import { Appointment } from '../appointments/appointment.entity';
 
 export enum ClinicalHistoryCategory {
   APPOINTMENT = 'APPOINTMENT',

@@ -1,15 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import type { EnvironmentVariables } from '../config/environment.js';
-import { User } from '../users/user.entity.js';
-import { Owner } from '../owners/owner.entity.js';
-import { Pet } from '../pets/pet.entity.js';
-import { Appointment } from '../appointments/appointment.entity.js';
-import { ClinicalHistory } from '../clinical-history/clinical-history.entity.js';
-import { PetMedicalProfile } from '../medical-profiles/pet-medical-profile.entity.js';
-import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
+import type { EnvironmentVariables } from '../config/environment';
+import { User } from '../users/user.entity';
+import { Owner } from '../owners/owner.entity';
+import { Pet } from '../pets/pet.entity';
+import { Appointment } from '../appointments/appointment.entity';
+import { ClinicalHistory } from '../clinical-history/clinical-history.entity';
+import { PetMedicalProfile } from '../medical-profiles/pet-medical-profile.entity';
+import { Veterinarian } from '../veterinarians/veterinarian.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { Product } from '../inventory/product.entity';
+import { StockBatch } from '../inventory/stock-batch.entity';
+import { StockMovement } from '../inventory/stock-movement.entity';
+import { Sale } from '../sales/sale.entity';
+import { SaleItem } from '../sales/sale-item.entity';
 
 @Module({
   imports: [
@@ -34,8 +39,15 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
             ClinicalHistory,
             PetMedicalProfile,
             Veterinarian,
+            Product,
+            StockBatch,
+            StockMovement,
+            Sale,
+            SaleItem,
           ],
           synchronize: true, // TODO: disable in prod and use migrations
+          logging: isLocal ? ['query', 'error'] : ['error'],
+          logger: 'advanced-console',
           ssl: !isLocal,
           extra: !isLocal ? { ssl: { rejectUnauthorized: false } } : undefined,
         };

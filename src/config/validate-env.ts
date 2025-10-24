@@ -1,6 +1,6 @@
 import { plainToInstance } from 'class-transformer';
 import { validateSync } from 'class-validator';
-import { EnvironmentVariables } from './environment.js';
+import { EnvironmentVariables } from './environment';
 
 export function validateEnv(config: Record<string, unknown>) {
   const validated = plainToInstance(EnvironmentVariables, config, {

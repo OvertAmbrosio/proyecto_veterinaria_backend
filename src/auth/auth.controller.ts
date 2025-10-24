@@ -9,11 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import type { Request } from 'express';
-import { AuthService } from './auth.service.js';
-import { LoginDto } from './dto/login.dto.js';
-import { JwtAuthGuard } from './guards/jwt-auth.guard.js';
-import { LocalAuthGuard } from './guards/local-auth.guard.js';
-import type { User } from '../users/user.entity.js';
+import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import type { User } from '../users/user.entity';
 
 @Controller('auth')
 export class AuthController {

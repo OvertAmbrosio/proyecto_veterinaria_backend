@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Pet } from '../pets/pet.entity.js';
+import { Pet } from '../pets/pet.entity';
 
 @Entity('pet_medical_profiles')
 export class PetMedicalProfile {

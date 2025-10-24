@@ -8,10 +8,7 @@ import {
   MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import {
-  AppointmentPriority,
-  AppointmentStatus,
-} from '../appointment.entity.js';
+import { AppointmentPriority, AppointmentStatus } from '../appointment.entity';
 
 export class UpdateAppointmentDto {
   @IsOptional()

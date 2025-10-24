@@ -7,7 +7,7 @@ import {
   Index,
   OneToMany,
 } from 'typeorm';
-import { Appointment } from '../appointments/appointment.entity.js';
+import { Appointment } from '../appointments/appointment.entity';
 
 @Entity('veterinarians')
 export class Veterinarian {

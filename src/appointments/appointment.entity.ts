@@ -8,8 +8,8 @@ import {
   Index,
   JoinColumn,
 } from 'typeorm';
-import { Pet } from '../pets/pet.entity.js';
-import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
+import { Pet } from '../pets/pet.entity';
+import { Veterinarian } from '../veterinarians/veterinarian.entity';
 
 export enum AppointmentStatus {
   PENDING = 'PENDING',

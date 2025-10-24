@@ -5,13 +5,13 @@ import {
   Appointment,
   AppointmentPriority,
   AppointmentStatus,
-} from './appointment.entity.js';
-import { CreateAppointmentDto } from './dto/create-appointment.dto.js';
-import { UpdateAppointmentDto } from './dto/update-appointment.dto.js';
-import { Pet } from '../pets/pet.entity.js';
-import { ClinicalHistoryService } from '../clinical-history/clinical-history.service.js';
-import { ClinicalHistoryCategory } from '../clinical-history/clinical-history.entity.js';
-import { Veterinarian } from '../veterinarians/veterinarian.entity.js';
+} from './appointment.entity';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { Pet } from '../pets/pet.entity';
+import { ClinicalHistoryService } from '../clinical-history/clinical-history.service';
+import { ClinicalHistoryCategory } from '../clinical-history/clinical-history.entity';
+import { Veterinarian } from '../veterinarians/veterinarian.entity';
 
 @Injectable()
 export class AppointmentsService {
@@ -62,18 +62,34 @@ export class AppointmentsService {
     return saved;
   }
 
-  async findAll(petId?: number): Promise<Appointment[]> {
+  async findAll(
+    petId?: number,
+    from?: string,
+    to?: string,
+    status?: AppointmentStatus,
+  ): Promise<Appointment[]> {
+    const qb = this.apptRepo
+      .createQueryBuilder('a')
+      .leftJoinAndSelect('a.pet', 'pet')
+      .leftJoinAndSelect('a.veterinarian', 'vet')
+      .orderBy('a.scheduledAt', 'DESC');
+
     if (petId) {
-      return this.apptRepo.find({
-        where: { pet: { id: petId } },
-        relations: { pet: true, veterinarian: true },
-        order: { scheduledAt: 'DESC' },
-      });
+      qb.andWhere('pet.id = :petId', { petId });
     }
-    return this.apptRepo.find({
-      relations: { pet: true, veterinarian: true },
-      order: { scheduledAt: 'DESC' },
-    });
+    if (from) {
+      qb.andWhere('a.scheduledAt >= :from', { from: new Date(from) });
+    }
+    if (to) {
+      const toEnd = new Date(to);
+      toEnd.setHours(23, 59, 59, 999);
+      qb.andWhere('a.scheduledAt <= :to', { to: toEnd });
+    }
+    if (status) {
+      qb.andWhere('a.status = :status', { status });
+    }
+
+    return qb.getMany();
   }
 
   async findOne(id: number): Promise<Appointment> {
